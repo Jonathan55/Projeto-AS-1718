@@ -1,0 +1,18 @@
+C:\Development\Academics\ArchBench\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logout.dll
+C:\Development\Academics\ArchBench\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logout.pdb
+C:\Development\Academics\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.dll
+C:\Development\Academics\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.pdb
+C:\Development\Academics\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.csprojResolveAssemblyReference.cache
+C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logout.dll
+C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logout.pdb
+C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.csprojResolveAssemblyReference.cache
+C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.csproj.CoreCompileInputs.cache
+C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.csproj.CopyComplete
+C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.dll
+C:\Users\leonel.nobrega\Source\Repos\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logout.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logout.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.csproj.CoreCompileInputs.cache
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.csproj.CopyComplete
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.pdb

@@ -1,0 +1,11 @@
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.csproj.CoreCompileInputs.cache
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\bin\Debug\ArchBench.PlugIns.Broker.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\bin\Debug\ArchBench.PlugIns.Broker.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\bin\Debug\ArchBench.Core.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\bin\Debug\HttpServer.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\bin\Debug\ArchBench.Core.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\bin\Debug\HttpServer.xml
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.csproj.CopyComplete
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.csprojAssemblyReference.cache
