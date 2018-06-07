@@ -51,13 +51,16 @@ namespace ArchBench.PlugIns.Broker
                         // Translate data bytes to a ASCII string.
                         String data = Encoding.ASCII.GetString(bytes, 0, count);
 
-                        char operation = data[0];
-                        String server = data.Substring(1, data.IndexOf('-', 1) - 1);
-                        String port = data.Substring(data.IndexOf('-', 1) + 1);
+                        string[] parts = data.Split( '|' );
+                        System.Diagnostics.Trace.Assert( parts.Length > 2 );
+                        char operation = parts[0][0];
+                        String server  = parts[1];
+                        String port    = parts[2];
+                        string service = parts.Length > 2 ? parts[3] : string.Empty;
                         switch (operation)
                         {
                             case '+':
-                                Regist(server, int.Parse(port));
+                                Regist(server, int.Parse(port), service);
                                 break;
                             case '-':
                                 Unregist(server, int.Parse(port));
@@ -81,11 +84,24 @@ namespace ArchBench.PlugIns.Broker
 
         private readonly List<KeyValuePair<string, int>> mServers = new List<KeyValuePair<string, int>>();
 
-        private void Regist(String aAddress, int aPort)
+        // Serviço,Servidor
+        //Dictionary<string, ICollection<string>> mServices = new Dictionary<string, ICollection<string>();
+        // Sessão,Servidor
+        //Dictionary<string, string> mSessions = new Dictionary<string, string>();
+        
+        private void Regist(String aAddress, int aPort, string aService )
         {
             if (mServers.Any(p => p.Key == aAddress && p.Value == aPort)) return;
             mServers.Add(new KeyValuePair<string, int>(aAddress, aPort));
             Host.Logger.WriteLine("Added server {0}:{1}.", aAddress, aPort);
+            
+            /*
+            if (aService != "" && mServices.ContainsKey(aService)) {
+                String[] servers = mServices[aService];
+                servers.Add(string.Concat(aAddress, ":", aPort));
+                //mServices.Add(string.Concat(aAddress, ":", aPort), aService);
+                Host.Logger.WriteLine("Added Service {0} @ {1}.", aService, string.Concat(aAddress, ":", aPort));
+            }*/
         }
 
         private void Unregist(string aAddress, int aPort)
@@ -98,6 +114,13 @@ namespace ArchBench.PlugIns.Broker
             {
                 Host.Logger.WriteLine("The server {0}:{1} is not registered.", aAddress, aPort);
             }
+
+            // Remover Serviços
+            /*
+            if (mServices.Remove(mServices.First(item => item.Key.Equals(string.Concat(aAddress, ":", aPort)))))
+            {
+                Host.Logger.WriteLine("Removed Service @ {0}", string.Concat(aAddress, ":", aPort));
+            }*/
         }
 
         #endregion
@@ -105,11 +128,26 @@ namespace ArchBench.PlugIns.Broker
         #region IArchServerModulePlugIn Members
 
         public bool Process(IHttpRequest aRequest, IHttpResponse aResponse, IHttpSession aSession)
-        {
-            
-            // TODO Query String
+        {            
 
-            if (mServers.Count < 2) return false;
+            if (mServers.Count < 1) return false;
+
+            /*
+            var url_parts = aRequest.Uri.AbsolutePath.Split('/');
+            if (url_parts.Length < 2) return false;
+
+            // Check Service
+            var service = url_parts[1];
+            var services = mServices.Where(item => item.Value.Equals(service));
+            if (services.Count() < 1) return false;
+
+            // Check Session
+            var writer5 = new StreamWriter(aResponse.Body);
+            writer5.WriteLine("Broker Home Page, Service {0}", service);
+            writer5.Flush();
+            return true;
+            // TODO Query String
+            */
 
             var proxy = false;
             var proxy_url = new StringBuilder();
@@ -192,9 +230,15 @@ namespace ArchBench.PlugIns.Broker
                     return true;
                 }
 
+                var writer3 = new StreamWriter(aResponse.Body, client.Encoding);
+                writer3.Write(client.Encoding.GetString(bytes));
+                writer3.Flush();
+                return true;
+                /*
                 aResponse.SendHeaders();
                 aResponse.SendBody(bytes, 0, bytes.Length);
                 return true;
+                */
 
             }
 

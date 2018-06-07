@@ -23,3 +23,12 @@ C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.csproj.CopyComplete
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.dll
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Login.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Login.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.csprojAssemblyReference.cache
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.Resource.resources
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.csproj.GenerateResource.cache
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.csproj.CoreCompileInputs.cache
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.csproj.CopyComplete
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Login\obj\Debug\ArchBench.PlugIns.Login.pdb

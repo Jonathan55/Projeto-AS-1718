@@ -17,3 +17,10 @@ C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.csproj.CopyComplete
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.dll
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logger.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logger.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.csprojAssemblyReference.cache
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.csproj.CoreCompileInputs.cache
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.csproj.CopyComplete
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Logger\obj\Debug\ArchBench.PlugIns.Logger.pdb
