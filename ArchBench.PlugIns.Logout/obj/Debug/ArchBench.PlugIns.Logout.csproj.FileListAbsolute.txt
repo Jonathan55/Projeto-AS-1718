@@ -16,3 +16,9 @@ C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.csproj.CopyComplete
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.dll
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logout.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Logout.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.csproj.CoreCompileInputs.cache
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.csproj.CopyComplete
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Logout\obj\Debug\ArchBench.PlugIns.Logout.pdb

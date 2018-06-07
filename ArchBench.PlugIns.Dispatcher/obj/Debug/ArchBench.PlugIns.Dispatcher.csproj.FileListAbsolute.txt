@@ -17,3 +17,10 @@ C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.csproj.CopyComplete
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.dll
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\ArchBench\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Dispatcher.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Dispatcher.pdb
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.csprojAssemblyReference.cache
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.csproj.CoreCompileInputs.cache
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.csproj.CopyComplete
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.dll
+C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Dispatcher\obj\Debug\ArchBench.PlugIns.Dispatcher.pdb

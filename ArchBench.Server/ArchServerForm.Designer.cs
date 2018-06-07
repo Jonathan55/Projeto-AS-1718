@@ -69,6 +69,7 @@
             this.mPluginsTool = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.mOutput = new System.Windows.Forms.TextBox();
+            this.mServiceStripTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -317,6 +318,7 @@
             this.toolStripSeparator6,
             this.mRegistButton,
             this.mRemoteServerAddress,
+            this.mServiceStripTextBox,
             this.toolStripSeparator7,
             this.mPluginsTool});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
@@ -402,6 +404,11 @@
             this.mOutput.Size = new System.Drawing.Size(465, 248);
             this.mOutput.TabIndex = 3;
             // 
+            // mServiceStripTextBox
+            // 
+            this.mServiceStripTextBox.Name = "mServiceStripTextBox";
+            this.mServiceStripTextBox.Size = new System.Drawing.Size(100, 25);
+            // 
             // ArchServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -465,6 +472,7 @@
         private System.Windows.Forms.ToolStripButton mRegistButton;
         private System.Windows.Forms.ToolStripTextBox mRemoteServerAddress;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripTextBox mServiceStripTextBox;
     }
 }
 
