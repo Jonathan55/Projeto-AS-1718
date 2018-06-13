@@ -105,4 +105,3 @@ C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\Arc
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.Server\obj\Debug\ArchBench.Server.csproj.CopyComplete
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.Server\obj\Debug\ArchBench.Server.exe
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.Server\obj\Debug\ArchBench.Server.pdb
-C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.Server\obj\Debug\ArchBench.Server.csprojAssemblyReference.cache

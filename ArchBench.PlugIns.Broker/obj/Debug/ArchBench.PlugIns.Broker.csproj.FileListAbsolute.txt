@@ -21,4 +21,3 @@ C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\Arc
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.pdb
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Broker.dll
 C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns\Debug\ArchBench.PlugIns.Broker.pdb
-C:\UMa\Arquitecturas de Software (2017-18)\Projeto Archbench\Projeto-AS-1718\ArchBench.PlugIns.Broker\obj\Debug\ArchBench.PlugIns.Broker.csprojAssemblyReference.cache
