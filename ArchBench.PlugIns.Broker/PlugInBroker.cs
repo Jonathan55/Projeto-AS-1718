@@ -82,21 +82,15 @@ namespace ArchBench.PlugIns.Broker
             }
         }
 
-        private readonly List<KeyValuePair<string, int>> mServers = new List<KeyValuePair<string, int>>();
-
-        // Serviço, Servidor        
+        // Serviço, Servidor
         private List<KeyValuePair<string, string>> mServices = new List<KeyValuePair<string, string>>();
         // Serviço, nextServer
         private Dictionary<string, int> mNextServer = new Dictionary<string, int>();
-        // Sessão, Servidor
-        private List<KeyValuePair<string, string>> mSessions = new List<KeyValuePair<string, string>>();
+        // Sessão, Serviço, Servidor
+        private List<string[]> mSessions = new List<string[]>();
 
         private void Regist(String aAddress, int aPort, string aService )
-        {
-            if (mServers.Any(p => p.Key == aAddress && p.Value == aPort)) return;
-            mServers.Add(new KeyValuePair<string, int>(aAddress, aPort));
-            Host.Logger.WriteLine("Added server {0}:{1}.", aAddress, aPort);
-            
+        {          
             // Adicionar Serviços
             if (aService != "")
             {
@@ -119,15 +113,6 @@ namespace ArchBench.PlugIns.Broker
 
         private void Unregist(string aAddress, int aPort)
         {
-            if (mServers.Remove(new KeyValuePair<string, int>(aAddress, aPort)))
-            {
-                Host.Logger.WriteLine("Removed server {0}:{1}.", aAddress, aPort);
-            }
-            else
-            {
-                Host.Logger.WriteLine("The server {0}:{1} is not registered.", aAddress, aPort);
-            }
-
             string server = string.Concat(aAddress, ":", aPort);
 
             // Remover Serviço Associado ao Servidor
@@ -143,7 +128,7 @@ namespace ArchBench.PlugIns.Broker
             }
 
             // Remover Sessões Associadas ao Servidor
-            mSessions.RemoveAll(item => item.Value.Equals(server));
+            mSessions.RemoveAll(i => i[2].Equals(server));
         }
 
         #endregion
@@ -153,7 +138,6 @@ namespace ArchBench.PlugIns.Broker
         public bool Process(IHttpRequest aRequest, IHttpResponse aResponse, IHttpSession aSession)
         {            
 
-            if (mServers.Count < 1) return false;
             if (mServices.Count < 1) return false;
 
             var url_parts = aRequest.Uri.AbsolutePath.Split('/');
@@ -166,13 +150,11 @@ namespace ArchBench.PlugIns.Broker
 
             var proxy_url = new StringBuilder();
             string proxy_server;
-            string proxy_service;
-            var random = new Random();
+            string proxy_service = service;
 
             // Verificar se existe sessão
-            string session_server = null;
             string sessionID = null;
-            
+
             if (aRequest.Headers["Cookie"] != null)
             {
                 sessionID = aRequest.Headers["Cookie"].Substring(aRequest.Headers["Cookie"].IndexOf("__tiny_sessid=") + 14, 36);
@@ -180,29 +162,30 @@ namespace ArchBench.PlugIns.Broker
 
             if (sessionID != null)
             {
-                var cookieSessions = mSessions.Where(item => item.Key.Equals(sessionID));
-                if (cookieSessions.Count() > 0)
+                // Se houver sessão, procura por servidor associado
+                var sessions = mSessions.Where(i => i[0].Equals(sessionID) && i[1].Equals(service));
+                if (sessions.Count() > 0)
                 {
-                    session_server = cookieSessions.ElementAt(0).Value;
+                    // há servidor associado, encaminha
+                    proxy_server = sessions.ElementAt(0)[2];
                 }
-            }
-            
-            // Se houver sessão, enviar o cliente para o servidor da sessão
-            if (session_server != null)
-            {
-                // Há sessão/servidor
-                proxy_service = service;
-                proxy_server = session_server;
+                else
+                {
+                    // não há servidor associado, associa o proximo servidor e encaminha
+                    mNextServer[service] = (mNextServer[service] + 1) % services.Count();
+                    int nextService = mNextServer[service];
+                    proxy_server = services.ElementAt(nextService).Value;
+                    mSessions.Add(new string[] { sessionID, service, proxy_server });
+                }
             }
             else
             {
-                // não há sessão, enviar para o próximo
+                // não há sessão, encaminha para o próximo servidor
                 mNextServer[service] = (mNextServer[service] + 1) % services.Count();
                 int nextService = mNextServer[service];
-                proxy_service = services.ElementAt(nextService).Key;
                 proxy_server = services.ElementAt(nextService).Value;
             }
-
+           
             proxy_url.AppendFormat("http://{0}", proxy_server);
             var uri = aRequest.Uri.AbsolutePath;
             var proxy_uri = uri.Substring(uri.IndexOf(proxy_service) + proxy_service.Length);
@@ -239,11 +222,12 @@ namespace ArchBench.PlugIns.Broker
             }
 
             BackwardCookie(client, aResponse);
+            
             // Se houver nova sessão, guardar para mais tarde enviar para o servidor certo
             if (client.ResponseHeaders["Set-Cookie"] != null)
             {
                 string setSessionID = client.ResponseHeaders["Set-Cookie"].Substring(client.ResponseHeaders["Set-Cookie"].IndexOf("__tiny_sessid=") + 14, 36);
-                mSessions.Add(new KeyValuePair<string, string>(setSessionID, proxy_server));
+                mSessions.Add(new string[] { setSessionID, proxy_service, proxy_server });
             }
 
             // Pass Content-Type
