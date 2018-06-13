@@ -84,24 +84,37 @@ namespace ArchBench.PlugIns.Broker
 
         private readonly List<KeyValuePair<string, int>> mServers = new List<KeyValuePair<string, int>>();
 
-        // Serviço,Servidor
-        //Dictionary<string, ICollection<string>> mServices = new Dictionary<string, ICollection<string>();
-        // Sessão,Servidor
-        //Dictionary<string, string> mSessions = new Dictionary<string, string>();
-        
+        // Serviço, Servidor        
+        private List<KeyValuePair<string, string>> mServices = new List<KeyValuePair<string, string>>();
+        // Serviço, nextServer
+        private Dictionary<string, int> mNextServer = new Dictionary<string, int>();
+        // Sessão, Servidor
+        private List<KeyValuePair<string, string>> mSessions = new List<KeyValuePair<string, string>>();
+
         private void Regist(String aAddress, int aPort, string aService )
         {
             if (mServers.Any(p => p.Key == aAddress && p.Value == aPort)) return;
             mServers.Add(new KeyValuePair<string, int>(aAddress, aPort));
             Host.Logger.WriteLine("Added server {0}:{1}.", aAddress, aPort);
             
-            /*
-            if (aService != "" && mServices.ContainsKey(aService)) {
-                String[] servers = mServices[aService];
-                servers.Add(string.Concat(aAddress, ":", aPort));
-                //mServices.Add(string.Concat(aAddress, ":", aPort), aService);
-                Host.Logger.WriteLine("Added Service {0} @ {1}.", aService, string.Concat(aAddress, ":", aPort));
-            }*/
+            // Adicionar Serviços
+            if (aService != "")
+            {
+                var server = string.Concat(aAddress, ":", aPort);
+                // Verifica se o Servidor já existe
+                var services = mServices.Where(item => item.Value.Equals(server));
+                // Se existir retorna
+                if (services.Count() > 0) return;
+                // Se não, adiciona
+                mServices.Add(new KeyValuePair<string, string>(aService, server));
+                Host.Logger.WriteLine("Added Service {0} @ {1}.", aService, server);
+
+                // Next Server
+                if (!mNextServer.ContainsKey(aService))
+                {
+                    mNextServer.Add(aService, 0);
+                }
+            }
         }
 
         private void Unregist(string aAddress, int aPort)
@@ -115,12 +128,22 @@ namespace ArchBench.PlugIns.Broker
                 Host.Logger.WriteLine("The server {0}:{1} is not registered.", aAddress, aPort);
             }
 
-            // Remover Serviços
-            /*
-            if (mServices.Remove(mServices.First(item => item.Key.Equals(string.Concat(aAddress, ":", aPort)))))
+            string server = string.Concat(aAddress, ":", aPort);
+
+            // Remover Serviço Associado ao Servidor
+            try
             {
-                Host.Logger.WriteLine("Removed Service @ {0}", string.Concat(aAddress, ":", aPort));
-            }*/
+                var service = mServices.FirstOrDefault(item => item.Value.Equals(server));
+                mServices.Remove(service);
+                Host.Logger.WriteLine("Removed Service @ {0}", server);
+            }
+            catch (Exception e)
+            {
+                Host.Logger.WriteLine("No services @ {0}", server);
+            }
+
+            // Remover Sessões Associadas ao Servidor
+            mSessions.RemoveAll(item => item.Value.Equals(server));
         }
 
         #endregion
@@ -131,120 +154,138 @@ namespace ArchBench.PlugIns.Broker
         {            
 
             if (mServers.Count < 1) return false;
+            if (mServices.Count < 1) return false;
 
-            /*
             var url_parts = aRequest.Uri.AbsolutePath.Split('/');
             if (url_parts.Length < 2) return false;
 
             // Check Service
             var service = url_parts[1];
-            var services = mServices.Where(item => item.Value.Equals(service));
+            var services = mServices.Where(item => item.Key.Equals(service));
             if (services.Count() < 1) return false;
 
-            // Check Session
-            var writer5 = new StreamWriter(aResponse.Body);
-            writer5.WriteLine("Broker Home Page, Service {0}", service);
-            writer5.Flush();
-            return true;
-            // TODO Query String
-            */
-
-            var proxy = false;
             var proxy_url = new StringBuilder();
-            var proxy_server = "";
+            string proxy_server;
+            string proxy_service;
+            var random = new Random();
 
-            if (aRequest.Uri.AbsolutePath.StartsWith("/info"))
+            // Verificar se existe sessão
+            string session_server = null;
+            string sessionID = null;
+            
+            if (aRequest.Headers["Cookie"] != null)
             {
-                proxy = true;
-                proxy_server = "/info";
-                proxy_url.AppendFormat("http://{0}:{1}", mServers[0].Key, mServers[0].Value);
-                var uri = aRequest.Uri.AbsolutePath;
-                var proxy_uri = uri.Substring(uri.IndexOf("/info") + 5);
-                proxy_url.Append(proxy_uri);
+                sessionID = aRequest.Headers["Cookie"].Substring(aRequest.Headers["Cookie"].IndexOf("__tiny_sessid=") + 14, 36);
             }
 
-            if (aRequest.Uri.AbsolutePath.StartsWith("/sidoc"))
+            if (sessionID != null)
             {
-                proxy = true;
-                proxy_server = "/sidoc";
-                proxy_url.AppendFormat("http://{0}:{1}", mServers[1].Key, mServers[1].Value);
-                var uri = aRequest.Uri.AbsolutePath;
-                var proxy_uri = uri.Substring(uri.IndexOf("/sidoc") + 6);
-                proxy_url.Append(proxy_uri);
+                var cookieSessions = mSessions.Where(item => item.Key.Equals(sessionID));
+                if (cookieSessions.Count() > 0)
+                {
+                    session_server = cookieSessions.ElementAt(0).Value;
+                }
+            }
+            
+            // Se houver sessão, enviar o cliente para o servidor da sessão
+            if (session_server != null)
+            {
+                // Há sessão/servidor
+                proxy_service = service;
+                proxy_server = session_server;
+            }
+            else
+            {
+                // não há sessão, enviar para o próximo
+                mNextServer[service] = (mNextServer[service] + 1) % services.Count();
+                int nextService = mNextServer[service];
+                proxy_service = services.ElementAt(nextService).Key;
+                proxy_server = services.ElementAt(nextService).Value;
             }
 
-            if (proxy)
+            proxy_url.AppendFormat("http://{0}", proxy_server);
+            var uri = aRequest.Uri.AbsolutePath;
+            var proxy_uri = uri.Substring(uri.IndexOf(proxy_service) + proxy_service.Length);
+            proxy_url.Append(proxy_uri);
+
+            WebClient client = new WebClient();
+            byte[] bytes = null;
+            var response = "";
+
+            ForwardCookie(client, aRequest);
+            proxy_url.Append(GetQueryString(aRequest));
+
+            if (aRequest.Method == Method.Post)
             {
-                WebClient client = new WebClient();
-                byte[] bytes = null;
-                var response = "";
-
-                ForwardCookie(client, aRequest);
-                proxy_url.Append(GetQueryString(aRequest)); // ainda não funciona
-
-                if (aRequest.Method == Method.Post)
+                try
                 {
                     bytes = client.UploadValues(proxy_url.ToString(), GetFormValues(aRequest));
                 }
-                else
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                try
                 {
                     bytes = client.DownloadData(proxy_url.ToString());
                 }
-
-                BackwardCookie(client, aResponse);
-
-                // Pass Content-Type
-                aResponse.AddHeader("Content-Type", client.ResponseHeaders["Content-Type"]);
-
-                if (client.ResponseHeaders["Content-Type"] == "text/html;charset=UTF-8")
+                catch (Exception e)
                 {
-                    var writer = new StreamWriter(aResponse.Body);
-                    response = System.Text.Encoding.Default.GetString(bytes);
-                    var offset = 0;
-                    
-                    // action=
-                    foreach (Match match in Regex.Matches(response, @"\baction="))
-                    {
-                        response = response.Insert(match.Index + 8 + (offset * proxy_server.Length), proxy_server);
-                        offset++;
-                    }
-
-                    // src=
-                    offset = 0;
-                    foreach (Match match in Regex.Matches( response, @"\bsrc="))
-                    {
-                        response = response.Insert(match.Index + 5 + (offset * proxy_server.Length), proxy_server);
-                        offset++;
-                    }
-
-                    // href=
-                    offset = 0;
-                    foreach (Match match in Regex.Matches(response, @"\bhref="))
-                    {
-                        response = response.Insert(match.Index + 6 + (offset * proxy_server.Length), proxy_server);
-                        offset++;
-                    }
-
-                    writer.Write(response);
-                    writer.Flush();
-                    return true;
+                    return false;
                 }
-
-                var writer3 = new StreamWriter(aResponse.Body, client.Encoding);
-                writer3.Write(client.Encoding.GetString(bytes));
-                writer3.Flush();
-                return true;
-                /*
-                aResponse.SendHeaders();
-                aResponse.SendBody(bytes, 0, bytes.Length);
-                return true;
-                */
-
             }
 
-            var writer2 = new StreamWriter(aResponse.Body);
-            writer2.WriteLine("Broker Home Page");
-            writer2.Flush();
+            BackwardCookie(client, aResponse);
+            // Se houver nova sessão, guardar para mais tarde enviar para o servidor certo
+            if (client.ResponseHeaders["Set-Cookie"] != null)
+            {
+                string setSessionID = client.ResponseHeaders["Set-Cookie"].Substring(client.ResponseHeaders["Set-Cookie"].IndexOf("__tiny_sessid=") + 14, 36);
+                mSessions.Add(new KeyValuePair<string, string>(setSessionID, proxy_server));
+            }
+
+            // Pass Content-Type
+            aResponse.AddHeader("Content-Type", client.ResponseHeaders["Content-Type"]);
+
+            if (client.ResponseHeaders["Content-Type"] == "text/html;charset=UTF-8")
+            {
+                var writer = new StreamWriter(aResponse.Body);
+                response = System.Text.Encoding.Default.GetString(bytes);
+                var offset = 0;
+                   
+                // action=
+                foreach (Match match in Regex.Matches(response, @"\baction="))
+                {
+                    response = response.Insert(match.Index + 8 + (offset * (proxy_service.Length + 1)), String.Concat("/", proxy_service));
+                    offset++;
+                }
+
+                // src=
+                offset = 0;
+                foreach (Match match in Regex.Matches( response, @"\bsrc="))
+                {
+                    response = response.Insert(match.Index + 5 + (offset * (proxy_service.Length + 1)), String.Concat("/", proxy_service));
+                    offset++;
+                }
+
+                // href=
+                offset = 0;
+                foreach (Match match in Regex.Matches(response, @"\bhref="))
+                {
+                    response = response.Insert(match.Index + 6 + (offset * (proxy_service.Length + 1)), String.Concat("/", proxy_service));
+                    offset++;
+                }
+
+                writer.Write(response);
+                writer.Flush();
+                return true;
+            }
+
+            var writerContent = new StreamWriter(aResponse.Body, client.Encoding);
+            writerContent.Write(client.Encoding.GetString(bytes));
+            writerContent.Flush();
             return true;
 
         }
@@ -291,9 +332,9 @@ namespace ArchBench.PlugIns.Broker
 
         public string Name => "ArchServer Broker Plugin";
 
-        public string Description => "Dispatch clients to the proper server";
+        public string Description => "Proxy clients to the proper server";
 
-        public string Author => "Leonel Nobrega";
+        public string Author => "Adriana e Jonathan";
 
         public string Version => "1.0";
 
